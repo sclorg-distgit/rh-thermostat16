@@ -29,7 +29,7 @@ Version:    2.3
 # 60.X where X is an increasing int. 60 for EL-6. We use
 # 70.X for EL-7. For some reason we cannot rely on the
 # dist tag.
-Release:    %{custom_release}.5%{?dist}
+Release:    %{custom_release}.6%{?dist}
 Summary:    Package that installs %{scl}
 
 License:    GPLv2+
@@ -308,6 +308,7 @@ install -p -m 644 macros.%{scl_name_base}-scldevel %{buildroot}%{_root_sysconfdi
 %{_sysconfdir}/java/java.conf
 %{_sysconfdir}/java/javapackages-config.json
 %{_sysconfdir}/xdg/xmvn/configuration.xml
+%dir %{_mandir}/man7
 %{_mandir}/man7/%{scl_name}.*
 
 %files build
@@ -318,6 +319,9 @@ install -p -m 644 macros.%{scl_name_base}-scldevel %{buildroot}%{_root_sysconfdi
 
 
 %changelog
+* Tue Sep 06 2016 Jie Kang <jkang@redhat.com> - 2.3-6
+- Own in-collection directory. Resolves RHBZ#1371518
+
 * Fri Jun 24 2016 Severin Gehwolf <sgehwolf@redhat.com> - 2.3-5
 - Also done runtime require rh-java-common-scldevel, but
   rather rh-java-common-scldevel-common.
