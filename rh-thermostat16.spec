@@ -29,7 +29,7 @@ Version:    2.3
 # 60.X where X is an increasing int. 60 for EL-6. We use
 # 70.X for EL-7. For some reason we cannot rely on the
 # dist tag.
-Release:    %{custom_release}.5%{?dist}
+Release:    %{custom_release}.6%{?dist}
 Summary:    Package that installs %{scl}
 
 License:    GPLv2+
@@ -252,6 +252,13 @@ chmod a+x h2m_helper
 # generate the man page
 help2man -N --section 7 ./h2m_helper -o %{scl_name}.7
 
+# Fix single quotes in man page. See RHBZ#1379717
+#
+# http://lists.gnu.org/archive/html/groff/2008-06/msg00001.html suggests that
+# using "'" for quotes is correct, but the current implementation of man in 6
+# mangles it when rendering.
+sed -i "s/'/\\\\(aq/g" %{scl_name}.7
+
 
 %install
 (%scl_install)
@@ -318,6 +325,9 @@ install -p -m 644 macros.%{scl_name_base}-scldevel %{buildroot}%{_root_sysconfdi
 
 
 %changelog
+* Tue Oct 11 2016 Jie Kang <jkang@redhat.com> - 2.3-6
+- Fix quotes in man page. See RHBZ#1379717.
+
 * Fri Jun 24 2016 Severin Gehwolf <sgehwolf@redhat.com> - 2.3-5
 - Also done runtime require rh-java-common-scldevel, but
   rather rh-java-common-scldevel-common.
