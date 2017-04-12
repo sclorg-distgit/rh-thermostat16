@@ -24,12 +24,12 @@
 %global debug_package %{nil}
 
 Name:       %{scl_name}
-Version:    2.3
+Version:    2.4
 # Release should be higher than el6 builds. Use convention
 # 60.X where X is an increasing int. 60 for EL-6. We use
 # 70.X for EL-7. For some reason we cannot rely on the
 # dist tag.
-Release:    %{custom_release}.7%{?dist}
+Release:    %{custom_release}.1%{?dist}
 Summary:    Package that installs %{scl}
 
 License:    GPLv2+
@@ -325,10 +325,6 @@ install -p -m 644 macros.%{scl_name_base}-scldevel %{buildroot}%{_root_sysconfdi
 
 
 %changelog
-* Wed Jan 18 2017 Jie Kang <jkang@redhat.com> - 2.3-7
-- Switch back to version 2.3 and bump release for
-  RHSCL 2.4 rebuild
-
 * Wed Jan 11 2017 Jie Kang <jkang@redhat.com> - 2.4-1
 - Fix definition of JAVACONFDIRS. Resolves rhbz#1395260
 
