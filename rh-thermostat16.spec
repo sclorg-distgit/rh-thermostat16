@@ -29,7 +29,7 @@ Version:    2.3
 # 60.X where X is an increasing int. 60 for EL-6. We use
 # 70.X for EL-7. For some reason we cannot rely on the
 # dist tag.
-Release:    %{custom_release}.6%{?dist}
+Release:    %{custom_release}.7%{?dist}
 Summary:    Package that installs %{scl}
 
 License:    GPLv2+
@@ -105,7 +105,7 @@ export PATH="%{_bindir}:\${PATH:-/bin:/usr/bin}"
 export MANPATH="%{_mandir}:\${MANPATH}"
 
 # Needed by Java Packages Tools to locate java.conf
-export JAVACONFDIRS="%{_sysconfdir}/java:\${JAVACONFDIRS:-/etc/java}"
+export JAVACONFDIRS="%{_sysconfdir}/java\${JAVACONFDIRS:+:}\${JAVACONFDIRS:-}"
 
 # Required by XMvn to locate its configuration file(s)
 export XDG_CONFIG_DIRS="%{_sysconfdir}/xdg:\${XDG_CONFIG_DIRS:-/etc/xdg}"
@@ -325,6 +325,13 @@ install -p -m 644 macros.%{scl_name_base}-scldevel %{buildroot}%{_root_sysconfdi
 
 
 %changelog
+* Wed Jan 18 2017 Jie Kang <jkang@redhat.com> - 2.3-7
+- Switch back to version 2.3 and bump release for
+  RHSCL 2.4 rebuild
+
+* Wed Jan 11 2017 Jie Kang <jkang@redhat.com> - 2.4-1
+- Fix definition of JAVACONFDIRS. Resolves rhbz#1395260
+
 * Tue Oct 11 2016 Jie Kang <jkang@redhat.com> - 2.3-6
 - Fix quotes in man page. See RHBZ#1379717.
 
